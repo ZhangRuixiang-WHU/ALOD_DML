@@ -2,7 +2,7 @@
 
 This repo contains the codes for the TGRS paper: "Minimizing Sample Redundancy for Label-efficient Object Detection in Aerial Images"
 
-**<font color=#FF0000 >Codes will be available soon.</font>**
+**<font color=#FF0000 size=5 >Codes will be available soon.</font>**
 
 ### Introduction
 In this paper, we propose a novel labeling pattern that acquires heterogeneous object labels in a class-orthogonal manner, called Attribute-aware labeling pattern for Label-efficient Object Detection in aerial images (ALOD).
