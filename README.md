@@ -10,7 +10,7 @@ In this paper, we propose a novel labeling pattern that acquires heterogeneous o
 <!-- ![demo image](figs/labeling.png){:height="10%" width="10%"} -->
 
 <div align="center">
-  <img src="figs/labeling.png" alt="demo image" width="300" />
+  <img src="figs/labeling.png" alt="demo image" style="width:50%; max-width:600px;" />
 </div>
 
 Meanwhile, we also propose a new learning pipeline under the ALOD labeling pattern, called Dynamic Multiview Learning (DML)
@@ -18,7 +18,7 @@ Meanwhile, we also propose a new learning pipeline under the ALOD labeling patte
 
 <!-- ![demo image](figs/Overall_DML.png) -->
 <div align="center">
-  <img src="figs/Overall_DML.png" alt="demo image" width="400" />
+  <img src="figs/Overall_DML.png" alt="demo image" style="width:80%; max-width:600px;" />
 </div>
 
 <!-- ### Requirements
