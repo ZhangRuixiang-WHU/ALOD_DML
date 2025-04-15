@@ -2,7 +2,7 @@
 
 This repo contains the codes for the TGRS paper: "Minimizing Sample Redundancy for Label-efficient Object Detection in Aerial Images"
 
-**<font color=#FF0000 size=5 >Codes will be available soon.</font>**
+
 
 ### Introduction
 In this paper, we propose a novel labeling pattern that acquires heterogeneous object labels in a class-orthogonal manner, called Attribute-aware labeling pattern for Label-efficient Object Detection in aerial images (ALOD).
@@ -20,6 +20,10 @@ Meanwhile, we also propose a new learning pipeline under the ALOD labeling patte
 <div align="center">
   <img src="figs/Overall_DML.png" alt="demo image" style="width:80%; max-width:600px;" />
 </div>
+
+### Codes
+
+**<font color=#FF0000 size=5 >Codes will be available soon.</font>**
 
 <!-- ### Requirements
 - Ubuntu 16.04
@@ -51,12 +55,18 @@ pip install -v -e .
 ### Quantitative Results
 
 
-![demo image](figs/res_table.png)
-
+<!-- ![demo image](figs/res_table.png) -->
+<div align="center">
+  <img src="figs/res_table.png" alt="demo image" style="width:80%; max-width:600px;" />
+</div>
 
 ### Visualization
 
-![demo image](figs/res_vis.png)
+<!-- ![demo image](figs/res_vis.png) -->
+<div align="center">
+  <img src="figs/res_vis.png" alt="demo image" style="width:80%; max-width:600px;" />
+</div>
+
 
 <!-- ### Data Preparation
 - Download the COCO dataset
