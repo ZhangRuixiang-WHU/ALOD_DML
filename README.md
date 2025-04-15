@@ -7,12 +7,19 @@ This repo contains the codes for the TGRS paper: "Minimizing Sample Redundancy f
 ### Introduction
 In this paper, we propose a novel labeling pattern that acquires heterogeneous object labels in a class-orthogonal manner, called Attribute-aware labeling pattern for Label-efficient Object Detection in aerial images (ALOD).
 
-![demo image](figs/labeling.png)
+<!-- ![demo image](figs/labeling.png){:height="10%" width="10%"} -->
+
+<div align="center">
+  <img src="figs/labeling.png" alt="demo image" width="300" />
+</div>
 
 Meanwhile, we also propose a new learning pipeline under the ALOD labeling pattern, called Dynamic Multiview Learning (DML)
 
 
-![demo image](figs/Overall_DML.png)
+<!-- ![demo image](figs/Overall_DML.png) -->
+<div align="center">
+  <img src="figs/Overall_DML.png" alt="demo image" width="400" />
+</div>
 
 <!-- ### Requirements
 - Ubuntu 16.04
