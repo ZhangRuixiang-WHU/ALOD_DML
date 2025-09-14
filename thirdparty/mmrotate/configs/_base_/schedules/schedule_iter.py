@@ -1,0 +1,22 @@
+# evaluation
+# evaluation = dict(interval=1, metric='mAP')
+# optimizer
+optimizer = dict(type='SGD', lr=0.0025, momentum=0.9, weight_decay=0.0001)
+optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))
+# learning policy
+# lr_config = dict(
+#     policy='step',
+#     warmup='linear',
+#     warmup_iters=500,
+#     warmup_ratio=1.0 / 3,
+#     step=[8, 11])
+# runner = dict(type='EpochBasedRunner', max_epochs=12)
+# checkpoint_config = dict(interval=1)
+evaluation = dict(interval=10000, metric='mAP')
+lr_config = dict(
+    policy='step',
+    warmup='linear',
+    warmup_iters=5000,
+    step=[160000, 180000])
+runner = dict(type="IterBasedRunner", max_iters=200000)
+checkpoint_config = dict(by_epoch=False, interval=10000)

@@ -3,164 +3,120 @@
 This repo contains the codes for the TGRS paper: "Minimizing Sample Redundancy for Label-efficient Object Detection in Aerial Images"
 
 
-
-### Introduction
+## Introduction
 In this paper, we propose a novel labeling pattern that acquires heterogeneous object labels in a class-orthogonal manner, called Attribute-aware labeling pattern for Label-efficient Object Detection in aerial images (ALOD).
 
-<!-- ![demo image](figs/labeling.png){:height="10%" width="10%"} -->
-
 <div align="center">
-  <img src="figs/labeling.png" alt="demo image" style="width:50%; max-width:600px;" />
+  <img src="figs/labeling.png" alt="ALOD labeling pattern demonstration" style="width:50%; max-width:600px;" />
 </div>
 
 Meanwhile, we also propose a new learning pipeline under the ALOD labeling pattern, called Dynamic Multiview Learning (DML)
 
-
-<!-- ![demo image](figs/Overall_DML.png) -->
 <div align="center">
-  <img src="figs/Overall_DML.png" alt="demo image" style="width:80%; max-width:600px;" />
-</div>
-
-### Codes
-
-**<font color=#FF0000 size=5 >Codes will be available soon.</font>**
-
-<!-- ### Requirements
-- Ubuntu 16.04
-- Python 3.7
-- PyTorch 1.10.1
-- CUDA 11.3.1
-- MMdet 2.25.3
-- MMrotate 0.3.0 -->
-
-<!-- ### Notes
-- We use [wandb](https://wandb.ai/) for visualization, if you don't want to use it, just comment line `273-284` in `configs/soft_teacher/base.py`.
-- The project should be compatible to the latest version of `mmdetection`. If you want to switch to the same version `mmdetection` as ours, run `cd thirdparty/mmdetection && git checkout v2.16.0` -->
-
-<!-- ### Installation
-Note that this repository is based on the Soft-Teacher, MMdetection,MMRotate. Assume that your environment has satisfied the above requirements, please follow the following steps for installation.
-
-```
-git clone https://github.com/ZhangRuixiang-WHU/S3OD/tree/master
-cd s3od
-pip install -r requirements/build.txt
-cd thirdparty/mmdetection
-pip install -v -e .
-cd ../mmrotate
-pip install -v -e .
-cd ../../
-pip install -v -e .
-``` -->
-
-### Quantitative Results
-
-
-<!-- ![demo image](figs/res_table.png) -->
-<div align="center">
-  <img src="figs/res_table.png" alt="demo image" style="width:80%; max-width:600px;" />
-</div>
-
-### Visualization
-
-<!-- ![demo image](figs/res_vis.png) -->
-<div align="center">
-  <img src="figs/res_vis.png" alt="demo image" style="width:80%; max-width:600px;" />
+  <img src="figs/Overall_DML.png" alt="Dynamic Multiview Learning pipeline" style="width:80%; max-width:600px;" />
 </div>
 
 
-<!-- ### Data Preparation
-- Download the COCO dataset
-- Execute the following command to generate data set splits:
-```shell script
-# YOUR_DATA should be a directory contains dota dataset.
-# For eg.:
-# YOUR_DATA/
-#  dota1.5/
-#     train_obb/
-#     val_obb/
-#     test_obb/
-ln -s ${YOUR_DATA} data
-bash tools/dataset/prepare_coco_data.sh conduct
-
-```
-For concrete instructions of what should be downloaded, please refer to `tools/dataset/prepare_coco_data.sh` line [`11-24`](https://github.com/microsoft/SoftTeacher/blob/863d90a3aa98615be3d156e7d305a22c2a5075f5/tools/dataset/prepare_coco_data.sh#L11) -->
+## Requirements
+- Python 3.7+
+- PyTorch 1.13.1
+- mmcv-full 1.7.0
+- mmdet 2.25.3 ([https://github.com/open-mmlab/mmdetection](https://github.com/open-mmlab/mmdetection))
+- mmrotate 0.3.3 ([https://github.com/open-mmlab/mmrotate](https://github.com/open-mmlab/mmrotate))
+- CUDA 11.3+ (recommended for GPU acceleration)
 
 
-<!-- ### Training
-- To train model on the **partial labeled data** setting:
-```shell script
-
-# PERCENT_LABELED_DATA: 1, 5, 10. The ratio of labeled coco data in whole training dataset.
-# GPU_NUM: number of gpus to run the job
-for FOLD in 1 2 3 4 5;
-do
-  bash tools/dist_train_partially.sh ${FOLD} <PERCENT_LABELED_DATA> <GPU_NUM>
-done
-```
-For example, we could run the following scripts to train our model on 10% labeled data with 1 GPUs:
-
-```shell script
-for FOLD in 1 2 3 4 5;
-do
-  bash tools/dist_train_partially.sh ${FOLD} 10 1
-done
-``` -->
-
-<!-- - To train model on the **full labeled data** setting:
-
-```shell script
-bash tools/dist_train.sh <CONFIG_FILE_PATH> <NUM_GPUS>
-```
-For example, to train ours `R50` model with 8 GPUs:
-```shell script
-bash tools/dist_train.sh configs/soft_teacher/soft_teacher_faster_rcnn_r50_caffe_fpn_coco_full_720k.py 8
-```
-- To train model on **new dataset**:
-
-The core idea is to convert a new dataset to coco format. Details about it can be found in the [adding new dataset](https://github.com/open-mmlab/mmdetection/blob/master/docs/tutorials/customize_dataset.md).
+## Installation
+> ```bash
+> cd thirdparty/mmdetection/
+> pip install -v -e .
+> cd ../mmrotate/
+> pip install -v -e .
+> cd ../../
+> pip install -v -e 
+> ```
 
 
+## Dataset Preparation
+### 1. Dataset Structure
+First, follow the DOTA data format in MMrotate to crop large images. The final dataset folder structure should be:
+> ```bash
+> data/
+> └── dota1/
+>     ├── train_obb/
+>     │   └── split_images/
+>     │       ├── annfiles/  # Annotation files (*.txt)
+>     │       └── images/    # Cropped image files
+>     └── val_obb/
+>         └── split_images/
+>             ├── annfiles/
+>             └── images/
+> ```
 
-### Evaluation
-```
-bash tools/dist_test.sh <CONFIG_FILE_PATH> <CHECKPOINT_PATH> <NUM_GPUS> --eval bbox --cfg-options model.test_cfg.rcnn.score_thr=<THR>
-``` -->
-<!-- ### Inference
-  To inference with trained model and visualize the detection results:
-
-  ```shell script
-  # [IMAGE_FILE_PATH]: the path of your image file in local file system
-  # [CONFIG_FILE]: the path of a confile file
-  # [CHECKPOINT_PATH]: the path of a trained model related to provided confilg file.
-  # [OUTPUT_PATH]: the directory to save detection result
-  python demo/image_demo.py [IMAGE_FILE_PATH] [CONFIG_FILE] [CHECKPOINT_PATH] --output [OUTPUT_PATH]
-  ```
-  For example:
-  - Inference on single image with provided `R50` model:
-   ```shell script
-  python demo/image_demo.py /tmp/tmp.png configs/soft_teacher/soft_teacher_faster_rcnn_r50_caffe_fpn_coco_full_720k.py work_dirs/downloaded.model --output work_dirs/
-  ```
-
-  After the program completes, a image with the same name as input will be saved to `work_dirs`
-
-  - Inference on many images with provided `R50` model:
-   ```shell script
-  python demo/image_demo.py '/tmp/*.jpg' configs/soft_teacher/soft_teacher_faster_rcnn_r50_caffe_fpn_coco_full_720k.py work_dirs/downloaded.model --output work_dirs/
-  ```
-
-[1] [A Simple Semi-Supervised Learning Framework for Object Detection](https://arxiv.org/pdf/2005.04757.pdf)
+### 2. Data Processing Scripts
+Run the following commands to prepare the K-ALOD dataset and build the Reliable Samples Pool:
+> ```bash
+> # Step 1: Construct K-ALOD dataset from raw DOTA data
+> python prepare_data_and_model/1_conduct_K-ALOD_dataset.py
+>
+> # Step 2: Crop object patches to build Reliable Samples Pool
+> python prepare_data_and_model/2_cut_image_patches.py
+> ```
 
 
-[2] [Instant-Teaching: An End-to-End Semi-Supervised Object Detection Framework](https://arxiv.org/pdf/2103.11402.pdf) -->
+## Pretraining
+Before formal training, perform pretraining with the base detector and convert the model to T-S mode:
+> ```bash
+> # Step 1: Pretrain the base detector (using 1 GPU, adjust GPU number as needed)
+> cd thirdparty/mmrotate
+> ./tools/dist_train.sh configs/rotated_faster_rcnn/rotated_faster_rcnn_r50_fpn_for_alod.py 1
+> # Step 2: Convert the pretrained base model to T-S (Teacher-Student) mode
+>  
+> cd ../../
+> python prepare_data_and_model/generated_the_pretrained_T-S_model.py
+> ```
+
+## Training
+Use the following command to start the formal training of the ALOD-DML model:
+> ```bash
+> # Train with 2 GPUs (adjust GPU number according to your device)
+> bash ./tools/dist_train.sh configs/K_ALOD_dotav1/PLOD_v1_rofaster_dota1_1ins.py 2
+> ```
 
 
-<!-- ## Citation
+## Quantitative Results
+<div align="center">
+  <img src="figs/res_table.png" alt="Quantitative comparison results" style="width:80%; max-width:600px;" />
+</div>
 
-```bib
-@article{xu2021end,
-  title={End-to-End Semi-Supervised Object Detection with Soft Teacher},
-  author={Xu, Mengde and Zhang, Zheng and Hu, Han and Wang, Jianfeng and Wang, Lijuan and Wei, Fangyun and Bai, Xiang and Liu, Zicheng},
-  journal={Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-  year={2021}
+The table above shows the quantitative performance of our ALOD-DML method compared with other state-of-the-art label-efficient object detection methods on the DOTA dataset.
+
+
+## Visualization
+<div align="center">
+  <img src="figs/res_vis.png" alt="Detection results visualization" style="width:80%; max-width:600px;" />
+</div>
+
+The figure above visualizes the detection results of our ALOD-DML method on aerial images, demonstrating its effectiveness in recognizing objects with different orientations and sizes.
+
+
+## Citation
+If you use this code or our work in your research, please cite our TGRS paper:
+```bibtex
+@article{ALOD_DML,
+  author={Zhang, Ruixiang and Xu, Chang and Zhu, Haoran and Xu, Fang and Yang, Wen and Zhang, Haijian and Xia, Gui-Song},
+  journal={IEEE Transactions on Geoscience and Remote Sensing}, 
+  title={Minimizing Sample Redundancy for Label-Efficient Object Detection in Aerial Images}, 
+  year={2025},
+  volume={63},
+  number={},
+  pages={1-14},
+  doi={10.1109/TGRS.2025.3562395}
 }
-``` -->
+```
+
+
+## Acknowledgements
+This project is built upon the following open-source libraries, and we sincerely appreciate their contributions:
+- [MMdetection](https://github.com/open-mmlab/mmdetection): OpenMMLab object detection toolbox
+- [MMrotate](https://github.com/open-mmlab/mmrotate): OpenMMLab rotated object detection toolbox
